@@ -3,6 +3,7 @@ import logoImage from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import { IoCart } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const NavBar = () => {
   return (
