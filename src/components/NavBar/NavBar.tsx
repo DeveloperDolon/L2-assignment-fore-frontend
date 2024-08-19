@@ -66,7 +66,8 @@ const NavBar = () => {
           </ul>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center">
+          <Badge variant={"default"} className="w-fit bg-red-500 px-2">1</Badge>
           <Button size={"sm"}>
             <IoCart className="md:text-2xl text-xl" />
           </Button>
