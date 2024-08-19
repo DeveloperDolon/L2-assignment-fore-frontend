@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 const NavBar = () => {
   return (
     <div>
-      <MyContainer className="flex justify-between items-center md:py-3 sm:py-2 py-1">
+      <MyContainer className="flex justify-between items-center md:pt-3 sm:pt-2 pt-1 pb-1">
         <div>
           <img
             className="md:w-20 sm:w-14 w-10 md:h-12 sm:h-10 h-8"
