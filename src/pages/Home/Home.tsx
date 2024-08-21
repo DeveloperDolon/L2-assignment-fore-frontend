@@ -1,15 +1,11 @@
-import bgImage from "../../assets/bgImage.jpg";
+import Banner from './Banner';
 
 const Home = () => {
-  return <div 
-  style={{
-    background: `url(${bgImage}) no-repeat center center`,
-    backgroundSize: "cover"
-  }}
-  className="min-h-screen bg-red-300"
-  >
-
-  </div>;
+  return (
+    <>
+      <Banner />
+    </>
+  );
 };
 
 export default Home;
