@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 interface TMyContainer {
   children: ReactNode;
-  className: string;
+  className?: string;
 }
 
 const MyContainer = ({ children, className }: TMyContainer) => {

@@ -1,5 +1,6 @@
-import bannerImage from '@/assets/bgImage.jpg';
 import MyContainer from '@/components/MyContainer/MyContainer';
+
+import bannerImage from '@/assets/bgImage.jpg';
 
 const Banner = () => {
   return (
