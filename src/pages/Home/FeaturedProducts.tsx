@@ -27,11 +27,16 @@ const FeaturedProducts = () => {
       <div className='md:mt-5 mt-3'>
         <Pagination>
           <PaginationContent>
-            <PaginationItem>
+            <PaginationItem className='font-secondary'>
               <PaginationPrevious href='#' />
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href='#'>1</PaginationLink>
+              <PaginationLink
+                className='font-sans'
+                href='#'
+              >
+                1
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
               <PaginationEllipsis />
