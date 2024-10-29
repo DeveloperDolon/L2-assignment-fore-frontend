@@ -1,0 +1,22 @@
+.masonry-gallery-demo {
+  margin: 0 auto;
+
+  .grid-sizer {
+    width: 20%;
+  }
+
+  .lg-item {
+    width: 33.33%;
+  }
+
+  .lg-item {
+    float: left;
+    margin-bottom: 10px;
+  }
+
+  .lg-item img {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+}
