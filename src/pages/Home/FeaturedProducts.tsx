@@ -1,6 +1,15 @@
 import { SiOpenaigym } from 'react-icons/si';
 import MyContainer from '@/components/MyContainer/MyContainer';
 import ProductCard from '@/components/ProductCard';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 
 const FeaturedProducts = () => {
   return (
@@ -13,6 +22,25 @@ const FeaturedProducts = () => {
         {[1, 2, 3, 4, 5].map((item) => (
           <ProductCard key={item} />
         ))}
+      </div>
+
+      <div className='md:mt-5 mt-3'>
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href='#' />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href='#'>1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href='#' />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     </MyContainer>
   );
