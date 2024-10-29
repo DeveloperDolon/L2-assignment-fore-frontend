@@ -9,10 +9,6 @@ module.exports = {
   ],
   prefix: '',
   theme: {
-    fontFamily: {
-      primary: ['Raleway', 'sans-serif'],
-      secondary: ['New Amsterdam', 'sans-serif'],
-    },
     container: {
       center: true,
       padding: '2rem',
@@ -21,6 +17,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        primary: ['Raleway', 'sans-serif'],
+        secondary: ['New Amsterdam', 'sans-serif'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

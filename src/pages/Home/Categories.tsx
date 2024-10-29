@@ -6,7 +6,7 @@ import style from './Home.module.scss';
 const Categories = () => {
   return (
     <MyContainer>
-      <h1 className='flex font-semibold gap-3 items-center mb-8 md:text-4xl mt-10 sm:text-2xl text-lg'>
+      <h1 className='flex font-secondary font-semibold gap-3 items-center mb-8 md:text-5xl mt-10 sm:text-3xl text-xl'>
         <MdOutlineCategory />
         Products categories
       </h1>
