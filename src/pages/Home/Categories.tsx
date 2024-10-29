@@ -1,3 +1,4 @@
+import { MdOutlineCategory } from 'react-icons/md';
 import MyContainer from '@/components/MyContainer/MyContainer';
 
 import style from './Home.module.scss';
@@ -5,7 +6,8 @@ import style from './Home.module.scss';
 const Categories = () => {
   return (
     <MyContainer>
-      <h1 className='font-semibold mb-8 md:text-4xl mt-10 sm:text-2xl text-lg'>
+      <h1 className='flex font-semibold gap-3 items-center mb-8 md:text-4xl mt-10 sm:text-2xl text-lg'>
+        <MdOutlineCategory />
         Products categories
       </h1>
 
