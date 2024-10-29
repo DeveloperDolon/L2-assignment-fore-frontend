@@ -1,11 +1,11 @@
 import Banner from './Banner';
-import BestSellers from './BestSellers';
+import Categories from './Categories';
 
 const Home = () => {
   return (
     <>
       <Banner />
-      <BestSellers />
+      <Categories />
     </>
   );
 };

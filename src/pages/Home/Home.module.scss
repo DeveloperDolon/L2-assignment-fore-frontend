@@ -1,0 +1,8 @@
+.category_container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.category_container::-webkit-scrollbar {
+  display: none;
+}
