@@ -54,3 +54,12 @@ type User = {
   role?: string;
   avatar?: string | File;
 };
+
+type ProductOption = {
+  menuName: string;
+  tags: string[];
+  submenu: {
+    label: string;
+    value: string | number | boolean;
+  }[];
+};

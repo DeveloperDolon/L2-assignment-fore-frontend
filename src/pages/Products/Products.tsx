@@ -7,6 +7,7 @@ import {
   SidebarMenuSubItem,
   SidebarProvider,
 } from '@/components/ui/sidebar';
+import productFilteringOptions from '@/utils/filteringOptions';
 import {
   Collapsible,
   CollapsibleContent,
@@ -30,24 +31,33 @@ const Products = () => {
         <div className='md:col-span-2'>
           <SidebarProvider>
             <SidebarMenu>
-              <Collapsible
-                defaultOpen
-                className='group/collapsible'
-              >
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton>
-                      Hello world{' '}
-                      <ChevronDown className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180' />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      <SidebarMenuSubItem> Hello world</SidebarMenuSubItem>
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
+              {productFilteringOptions?.map((item) => (
+                <SidebarMenuItem key={item?.menuName}>
+                  {/* Wrap each item with its own Collapsible */}
+                  <Collapsible
+                    defaultOpen={false}
+                    className='group/collapsible'
+                  >
+                    <CollapsibleTrigger asChild>
+                      <SidebarMenuButton>
+                        {item?.menuName + ' '}
+                        <ChevronDown className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180' />
+                      </SidebarMenuButton>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <SidebarMenuSub>
+                        {item?.submenu?.map((submenu) => (
+                          <SidebarMenuSubItem key={submenu?.label}>
+                            <SidebarMenuButton>
+                              {submenu?.label}
+                            </SidebarMenuButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    </CollapsibleContent>
+                  </Collapsible>
                 </SidebarMenuItem>
-              </Collapsible>
+              ))}
             </SidebarMenu>
           </SidebarProvider>
         </div>
