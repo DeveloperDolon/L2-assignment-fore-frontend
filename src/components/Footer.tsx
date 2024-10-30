@@ -14,34 +14,34 @@ const Footer = () => {
               Company Name
             </h1>
             <ul className='md:mt-4 mt-3 space-y-2'>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Privacy Policy</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Terms of Service</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Accessible</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>CA Transparency Act</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>CA Proposition 65 WARNING</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>ISO Certificate</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Terms & Conditions of Sale</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Join our Email List</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Affiliate Program</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Financing - Life Fitness</NavLink>
               </li>
             </ul>
@@ -52,25 +52,25 @@ const Footer = () => {
               Customer Service
             </h1>
             <ul className='md:mt-4 mt-3 space-y-2'>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>FAQ</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Contact Us</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Returns & Cancellations</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Request Service</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Customer Home Gym</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Product Registration</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Referrals</NavLink>
               </li>
             </ul>
@@ -81,31 +81,31 @@ const Footer = () => {
               Site Links
             </h1>
             <ul className='md:mt-4 mt-3 space-y-2'>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Search</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Commercial Site</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Military & First Responder Discount</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Dealer Application</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Find a Store</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Cardio</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Strength</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Accessories</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>Outlet</NavLink>
               </li>
             </ul>
@@ -116,10 +116,10 @@ const Footer = () => {
               Connect
             </h1>
             <ul className='md:mt-4 mt-3 space-y-2'>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>800-527-6063 (Sales)</NavLink>
               </li>
-              <li className='md:text-base text-sm font-medium text-white'>
+              <li className='md:text-sm text-xs font-medium text-white'>
                 <NavLink to={'/'}>800-527-6065 (Support)</NavLink>
               </li>
 
