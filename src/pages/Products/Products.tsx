@@ -19,7 +19,7 @@ import { AiFillProduct } from 'react-icons/ai';
 const Products = () => {
   return (
     <MyContainer>
-      <p className='md:text-sm text-xs font-semibold md:mt-3 mt-2'>
+      <p className='md:text-sm text-xs font-semibold md:mt-3 mt-2 italic'>
         Home/Products
       </p>
 
