@@ -1,4 +1,17 @@
 import MyContainer from '@/components/MyContainer/MyContainer';
+import ProductCard from '@/components/ProductCard';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { CiSearch } from 'react-icons/ci';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -29,6 +42,23 @@ const Products = () => {
 
       <div className='grid md:grid-cols-8 grid-cols-1 md:gap-10 gap-0'>
         <div className='md:col-span-2'>
+          <div className='flex w-full max-w-sm items-center space-x-2 mb-7'>
+            <Input
+              className='placeholder:text-gray-400'
+              type='text'
+              placeholder='Search results'
+            />
+            <Button
+              size={'icon'}
+              color='red'
+              type='submit'
+              variant={'secondary'}
+              className='border font-bold hover:bg-slate-200 transition-all duration-300 active:scale-105'
+            >
+              <CiSearch />
+            </Button>
+          </div>
+
           <SidebarProvider>
             <SidebarMenu>
               {productFilteringOptions?.map((item) => (
@@ -61,8 +91,41 @@ const Products = () => {
             </SidebarMenu>
           </SidebarProvider>
         </div>
+        <div className='md:col-span-6 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 md:gap-8 gap-6'>
+          {[1, 2, 3, 4, 5].map((item) => (
+            <ProductCard key={item} />
+          ))}
 
-        <div className='md:col-span-6'>Outlet</div>
+          <div className='col-span-full md:mt-5 mt-3 mx-auto'>
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem className='font-secondary'>
+                  <PaginationPrevious
+                    className='font-semibold'
+                    href='#'
+                  />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink
+                    className='font-sans text-xl'
+                    href='#'
+                  >
+                    1
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext
+                    className='font-semibold'
+                    href='#'
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        </div>
       </div>
     </MyContainer>
   );
