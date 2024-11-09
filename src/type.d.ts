@@ -60,6 +60,6 @@ type ProductOption = {
   tags: string[];
   submenu: {
     label: string;
-    value: string | number | boolean;
+    value: string | number | undefined;
   }[];
 };

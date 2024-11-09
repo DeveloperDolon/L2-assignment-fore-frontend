@@ -28,6 +28,7 @@ import {
 } from '@radix-ui/react-collapsible';
 import { ChevronDown } from 'lucide-react';
 import { AiFillProduct } from 'react-icons/ai';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const Products = () => {
   return (
@@ -65,7 +66,7 @@ const Products = () => {
                 <SidebarMenuItem key={item?.menuName}>
                   {/* Wrap each item with its own Collapsible */}
                   <Collapsible
-                    defaultOpen={false}
+                    defaultOpen={true}
                     className='group/collapsible'
                   >
                     <CollapsibleTrigger asChild>
@@ -79,7 +80,18 @@ const Products = () => {
                         {item?.submenu?.map((submenu) => (
                           <SidebarMenuSubItem key={submenu?.label}>
                             <SidebarMenuButton>
-                              {submenu?.label}
+                              <div className='flex items-center space-x-2'>
+                                <Checkbox
+                                  id='terms2'
+                                  value={submenu?.value}
+                                />
+                                <label
+                                  htmlFor='terms2'
+                                  className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+                                >
+                                  {submenu?.label}
+                                </label>
+                              </div>
                             </SidebarMenuButton>
                           </SidebarMenuSubItem>
                         ))}

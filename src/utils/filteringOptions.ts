@@ -5,11 +5,11 @@ const productFilteringOptions: ProductOption[] = [
     submenu: [
       {
         label: 'In stock',
-        value: true,
+        value: 1,
       },
       {
         label: 'Out of stock',
-        value: false,
+        value: 0,
       },
     ],
   },
