@@ -36,7 +36,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Progress } from '@/components/ui/progress';
+import { cn } from '@/lib/utils';
+import { Slider } from '@/components/ui/slider';
 
 const Products = () => {
   return (
@@ -121,9 +122,11 @@ const Products = () => {
               <p className='font-sans text-center'>10000$</p>
             </div>
             <div className='mt-1 bg-[#cfcbcb] rounded-full'>
-              <Progress
-                value={45}
-                className='w-[60%] bg-red-500 h-2'
+              <Slider
+                defaultValue={[50]}
+                max={100}
+                step={1}
+                className={cn('w-[100%] text-yellow-500')}
               />
             </div>
           </div>
