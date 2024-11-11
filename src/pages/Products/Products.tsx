@@ -29,6 +29,14 @@ import {
 import { ChevronDown } from 'lucide-react';
 import { AiFillProduct } from 'react-icons/ai';
 import { Checkbox } from '@/components/ui/checkbox';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Progress } from '@/components/ui/progress';
 
 const Products = () => {
   return (
@@ -37,13 +45,20 @@ const Products = () => {
         Home/Products
       </p>
 
-      <h1 className='flex justify-center font-secondary font-semibold gap-3 items-center mb-8 md:text-5xl mt-10 sm:text-3xl text-xl'>
+      <h1
+        className='flex justify-center font-secondary font-semibold gap-3 items-center mb-8 md:text-5xl 
+      mt-10 sm:text-3xl text-xl'
+      >
         <AiFillProduct /> Products
       </h1>
 
       <div className='grid md:grid-cols-8 grid-cols-1 md:gap-10 gap-0'>
         <div className='md:col-span-2'>
-          <div className='flex w-full max-w-sm items-center space-x-2 mb-7'>
+          <Button className='bg-yellow-500 mb-4 hover:bg-yellow-300'>
+            Clear Filter
+          </Button>
+
+          <div className='flex w-full max-w-sm items-center space-x-2 mb-5'>
             <Input
               className='placeholder:text-gray-400'
               type='text'
@@ -60,7 +75,66 @@ const Products = () => {
             </Button>
           </div>
 
-          <SidebarProvider>
+          <div>
+            <Select>
+              <SelectTrigger className='w-full'>
+                <SelectValue placeholder='Sort' />
+              </SelectTrigger>
+              <SelectContent className='bg-white'>
+                <SelectItem
+                  className='cursor-pointer'
+                  value='ascending'
+                >
+                  A - Z
+                </SelectItem>
+                <SelectItem
+                  className='cursor-pointer'
+                  value='ascending'
+                >
+                  A - Z
+                </SelectItem>
+                <SelectItem
+                  className='cursor-pointer'
+                  value='descending'
+                >
+                  Z - A
+                </SelectItem>
+                <SelectItem
+                  className='cursor-pointer'
+                  value='oldest'
+                >
+                  Oldest
+                </SelectItem>
+                <SelectItem
+                  className='cursor-pointer'
+                  value='newest'
+                >
+                  Newest
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <label
+            className='mt-5 md:text-sm text-xs font-semibold text-center w-full block'
+            htmlFor=''
+          >
+            Filter with price range
+          </label>
+          <div className='mt-1 border p-5'>
+            <div className='flex justify-between'>
+              <p className='font-sans text-center'>5000$</p>
+              <p className='font-sans text-center'>10000$</p>
+            </div>
+            <div className='mt-1 bg-[#cfcbcb] rounded-full'>
+              <Progress
+                value={45}
+                className='w-[60%] bg-red-500 h-2'
+              />
+            </div>
+          </div>
+
+          <SidebarProvider className='mt-5'>
             <SidebarMenu>
               {productFilteringOptions?.map((item) => (
                 <SidebarMenuItem key={item?.menuName}>
@@ -87,7 +161,8 @@ const Products = () => {
                                 />
                                 <label
                                   htmlFor='terms2'
-                                  className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+                                  className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed 
+                                  peer-disabled:opacity-70'
                                 >
                                   {submenu?.label}
                                 </label>
