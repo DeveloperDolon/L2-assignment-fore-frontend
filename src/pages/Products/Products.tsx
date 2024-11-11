@@ -89,12 +89,6 @@ const Products = () => {
                 </SelectItem>
                 <SelectItem
                   className='cursor-pointer'
-                  value='ascending'
-                >
-                  A - Z
-                </SelectItem>
-                <SelectItem
-                  className='cursor-pointer'
                   value='descending'
                 >
                   Z - A
