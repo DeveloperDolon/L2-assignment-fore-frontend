@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/carousel';
 import ProductCard from '@/components/ProductCard';
 import Review from './Review';
+import CartDrawer from '../../components/CartDrawer';
 
 const ProductDetails = () => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -85,7 +86,7 @@ const ProductDetails = () => {
             In stock, ready to ship
           </p>
 
-          <div className='flex flex-wrap sm:gap-5 gap-3 md:mt-3 mt-2'>
+          <div className='flex sm:flex-nowrap flex-wrap sm:gap-5 gap-3 md:mt-3 mt-2'>
             <div className='border px-3 flex items-center gap-2'>
               <button
                 onClick={() => setQuantityCount(quantityCount + 1)}
@@ -211,6 +212,8 @@ const ProductDetails = () => {
           <Review key={item} />
         ))}
       </div>
+
+      <CartDrawer />
     </MyContainer>
   );
 };
