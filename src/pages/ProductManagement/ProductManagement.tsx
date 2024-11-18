@@ -152,7 +152,10 @@ export const columns: ColumnDef<Payment>[] = [
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
+          <DropdownMenuContent
+            align='end'
+            className='bg-white'
+          >
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.id)}
@@ -199,49 +202,60 @@ const ProductManagement = () => {
 
   return (
     <MyContainer>
-      <h1 className='font-secondary md:text-7xl sm:text-6xl text-5xl font-semibold text-center md:mt-7 mt-5 '>
+      <h1 className='font-secondary md:text-6xl sm:text-5xl text-4xl font-semibold text-center md:mt-7 mt-5 '>
         Product Management
       </h1>
 
       <div className='w-full md:mt-10 mt-8'>
-        <div className='flex items-center py-4'>
-          <Input
-            placeholder='Filter emails...'
-            value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
-            onChange={(event) =>
-              table.getColumn('email')?.setFilterValue(event.target.value)
-            }
-            className='max-w-sm'
-          />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant='outline'
-                className='ml-auto'
+        <div className='flex items-center justify-between py-4'>
+          <div className='flex items-center py-4 flex-1'>
+            <Input
+              placeholder='Filter emails...'
+              value={
+                (table.getColumn('email')?.getFilterValue() as string) ?? ''
+              }
+              onChange={(event) =>
+                table.getColumn('email')?.setFilterValue(event.target.value)
+              }
+              className='max-w-sm'
+            />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant='outline'
+                  className='ml-5'
+                >
+                  Columns <ChevronDown />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align='end'
+                className='bg-white'
               >
-                Columns <ChevronDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className='capitalize'
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
+                {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => {
+                    return (
+                      <DropdownMenuCheckboxItem
+                        key={column.id}
+                        className='capitalize'
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) =>
+                          column.toggleVisibility(!!value)
+                        }
+                      >
+                        {column.id}
+                      </DropdownMenuCheckboxItem>
+                    );
+                  })}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          <Button className='bg-red-400 text-white hover:bg-red-500 active:scale-95'>
+            Add Product
+          </Button>
         </div>
         <div className='rounded-md border'>
           <Table>
