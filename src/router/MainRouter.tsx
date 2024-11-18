@@ -3,6 +3,7 @@ import MainLayout from '../layout/MainLayout';
 import Home from '@/pages/Home/Home';
 import Products from '@/pages/Products/Products';
 import ProductDetails from '@/pages/ProductDetails/ProductDetails';
+import ProductManagement from '@/pages/ProductManagement/ProductManagement';
 
 export const MainRoute = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const MainRoute = createBrowserRouter([
       {
         path: '/product/:id',
         element: <ProductDetails />,
+      },
+      {
+        path: 'product-management',
+        element: <ProductManagement />,
       },
     ],
   },
