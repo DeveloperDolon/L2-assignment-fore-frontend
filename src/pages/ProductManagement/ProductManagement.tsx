@@ -34,6 +34,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Link } from 'react-router-dom';
 
 const data: Payment[] = [
   {
@@ -253,9 +254,11 @@ const ProductManagement = () => {
             </DropdownMenu>
           </div>
 
-          <Button className='bg-red-400 text-white hover:bg-red-500 active:scale-95'>
-            Add Product
-          </Button>
+          <Link to={'/add-product'}>
+            <Button className='bg-red-400 text-white hover:bg-red-500 active:scale-95'>
+              Add Product
+            </Button>
+          </Link>
         </div>
         <div className='rounded-md border'>
           <Table>
