@@ -11,6 +11,9 @@ const AddProduct = () => {
 
   return (
     <MyContainer>
+
+      <h1 className='md:text-6xl sm:text-5xl text-4xl md:mt-5 mt-4 md:mb-7 mb-5 font-semibold font-secondary text-center'>Add Product</h1>
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
