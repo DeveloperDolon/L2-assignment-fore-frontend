@@ -63,3 +63,16 @@ type ProductOption = {
     value: string | number | undefined;
   }[];
 };
+
+type DynamicFormFieldType = 'checkbox' | 'text' | 'textarea' | 'select' | 'date' | 'number' | 'file';
+
+type DynamicFormField = {
+  type : DynamicFormFieldType;
+  name: string;
+  label?: string;
+  defaultValue?: string | number;
+  placeholder?: string;
+  required?: boolean;
+  errorMessage?: string;
+  options?: {value?: string | number; label: string;}[];
+};
