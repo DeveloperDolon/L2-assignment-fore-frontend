@@ -20,7 +20,7 @@ import {
   SidebarMenuSubItem,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import productFilteringOptions from '@/utils/filteringOptions';
+import productFilteringOptions from '@/constant/filteringOptions';
 import {
   Collapsible,
   CollapsibleContent,

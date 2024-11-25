@@ -17,6 +17,8 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import ProductCard from '@/components/ProductCard';
+import Review from './Review';
+import CartDrawer from '../../components/CartDrawer';
 
 const ProductDetails = () => {
   const [quantityCount, setQuantityCount] = useState(1);
@@ -84,7 +86,7 @@ const ProductDetails = () => {
             In stock, ready to ship
           </p>
 
-          <div className='flex flex-wrap sm:gap-5 gap-3 md:mt-3 mt-2'>
+          <div className='flex sm:flex-nowrap flex-wrap sm:gap-5 gap-3 md:mt-3 mt-2'>
             <div className='border px-3 flex items-center gap-2'>
               <button
                 onClick={() => setQuantityCount(quantityCount + 1)}
@@ -199,13 +201,19 @@ const ProductDetails = () => {
         </SCarousel>
       </div>
 
-      <div className='flex items-center gap-5 md:mt-16 sm:mt-14 mt-12 justify-center'>
-        <RatingStar />
+      <h1 className='md:text-5xl sm:text-4xl text-3xl font-secondary text-center md:mt-24 sm:mt-20 mt-16'>
+        Reviews
+      </h1>
 
-        <p className='md:text-sm text-xs font-semibold font-sans'>
-          445 Reviews
-        </p>
+      <hr className='md:mt-3 mt-2' />
+
+      <div className='md:mt-5 mt-4 md:space-y-8 space-y-6'>
+        {[1, 2, 3, 4, 5]?.map((item) => (
+          <Review key={item} />
+        ))}
       </div>
+
+      <CartDrawer />
     </MyContainer>
   );
 };

@@ -27,7 +27,7 @@ const NavBar = () => {
                     ? 'pending'
                     : isActive
                     ? 'bg-red-500 text-white rounded py-1 px-3'
-                    : ''
+                    : ' py-1 px-3'
                 }
               >
                 Home
@@ -42,10 +42,25 @@ const NavBar = () => {
                     ? 'pending'
                     : isActive
                     ? 'bg-red-500 text-white rounded py-1 px-3'
-                    : ''
+                    : ' py-1 px-3'
                 }
               >
                 Products
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to={'/product-management'}
+                className={({ isActive, isPending }) =>
+                  isPending
+                    ? 'pending'
+                    : isActive
+                    ? 'bg-red-500 text-white rounded py-1 px-3'
+                    : ' py-1 px-3'
+                }
+              >
+                Product Management
               </NavLink>
             </li>
 
@@ -57,7 +72,7 @@ const NavBar = () => {
                     ? 'pending'
                     : isActive
                     ? 'bg-red-500 text-white rounded py-1 px-3'
-                    : ''
+                    : ' py-1 px-3'
                 }
               >
                 About Us
