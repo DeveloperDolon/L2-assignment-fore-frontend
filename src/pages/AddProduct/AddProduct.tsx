@@ -1,9 +1,21 @@
 import DynamicFormFieldenderer from '@/components/DynamicFormFieldenderer';
 import MyContainer from '@/components/MyContainer/MyContainer';
+import { addProductFormFields } from '@/constant/formFields';
+import { zodValidator } from '@tanstack/zod-form-adapter';
+import { serializeSchemaFromObject } from '@/utils/schemaSrializer';
 import { useForm } from '@tanstack/react-form';
+// import { z } from 'zod';
 
 const AddProduct = () => {
+  const productSchema = serializeSchemaFromObject(addProductFormFields);
+  console.log(productSchema)
+  // type product = z.infer<typeof productSchema>;
+
   const form = useForm({
+    validatorAdapter: zodValidator(),
+    validators: {
+      onChange: productSchema,
+    },
     onSubmit: async ({ value }) => {
       console.log(value);
     },
@@ -16,25 +28,24 @@ const AddProduct = () => {
       </h1>
 
       <form
+        className='grid md:grid-cols-2 grid-cols-1 gap-6'
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
           form.handleSubmit();
         }}
       >
-        <DynamicFormFieldenderer
-          form={form}
-          fieldProps={{
-            type: 'number',
-            name: 'discount',
-            label: 'Discount',
-            defaultValue: 0,
-            placeholder: 'Enter discount - (Percentage) ',
-            required: false,
-          }}
-        />
+        {addProductFormFields?.map((field) => (
+          <DynamicFormFieldenderer
+            key={field?.name}
+            form={form}
+            fieldProps={field}
+          />
+        ))}
 
-        <button type="submit">Submit</button>
+        <div>
+          <button type='submit'>Submit</button>
+        </div>
       </form>
     </MyContainer>
   );

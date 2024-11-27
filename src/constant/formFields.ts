@@ -1,16 +1,3 @@
-type DynamicFormFieldType = 'checkbox' | 'text' | 'textarea' | 'select' | 'date' | 'number' | 'file';
-
-export type DynamicFormField = {
-  type : DynamicFormFieldType;
-  name: string;
-  label?: string;
-  defaultValue?: string | number;
-  placeholder?: string;
-  required?: boolean;
-  errorMessage?: string;
-  options?: {value?: string | number; label: string;}[];
-};
-
 export const addProductFormFields : DynamicFormField[] = [
     {
         type: 'text',
@@ -103,13 +90,13 @@ export const addProductFormFields : DynamicFormField[] = [
         errorMessage: 'Must need to select brand.'
     },
     {
-        type: 'text',
+        type: 'textarea',
         name: 'warranty',
         label: 'Warrranty',
         placeholder: 'Input warranty.'
     },
     {
-        type: 'text',
+        type: 'textarea',
         name: 'policies',
         label: 'Policies',
         placeholder: 'Input Policies.',
