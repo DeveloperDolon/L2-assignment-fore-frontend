@@ -4,6 +4,7 @@ import { addProductFormFields } from '@/constant/formFields';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 import { serializeSchemaFromObject } from '@/utils/schemaSrializer';
 import { useForm } from '@tanstack/react-form';
+import { Button } from '@/components/ui/button';
 // import { z } from 'zod';
 
 const AddProduct = () => {
@@ -43,8 +44,8 @@ const AddProduct = () => {
           />
         ))}
 
-        <div>
-          <button type='submit'>Submit</button>
+        <div className='flex justify-center col-span-full md:mt-3 mt-2'>
+          <Button className='hover:bg-red-800 bg-red-500 text-white' type='submit'>Submit</Button>
         </div>
       </form>
     </MyContainer>
