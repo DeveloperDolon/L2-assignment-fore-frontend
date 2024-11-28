@@ -8,19 +8,19 @@ import { useForm } from '@tanstack/react-form';
 
 const AddProduct = () => {
   const productSchema = serializeSchemaFromObject(addProductFormFields);
-  console.log(productSchema)
   // type product = z.infer<typeof productSchema>;
-
+  
   const form = useForm({
     validatorAdapter: zodValidator(),
     validators: {
       onChange: productSchema,
+      onSubmit: productSchema
     },
     onSubmit: async ({ value }) => {
       console.log(value);
     },
   });
-
+  
   return (
     <MyContainer>
       <h1 className='md:text-6xl sm:text-5xl text-4xl md:mt-5 mt-4 md:mb-7 mb-5 font-semibold font-secondary text-center'>

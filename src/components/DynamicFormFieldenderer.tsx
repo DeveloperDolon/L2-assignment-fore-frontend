@@ -13,7 +13,10 @@ import { Textarea } from './ui/textarea';
 import { ZodType, ZodTypeDef } from 'zod';
 
 type DynamicFormFieldendererProps<TFormData> = {
-  form: ReactFormExtendedApi<unknown, Validator<unknown, ZodType<TFormData, ZodTypeDef, unknown>>>;
+  form: ReactFormExtendedApi<
+    unknown,
+    Validator<unknown, ZodType<TFormData, ZodTypeDef, unknown>>
+  >;
   fieldProps: DynamicFormField;
 };
 
@@ -36,23 +39,36 @@ const DynamicFormFieldenderer = <TFormData,>({
       <div>
         <form.Field
           name={fieldProps?.name}
-          children={(field) => (
-            <>
-              <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
-                {labelWithOptonal}
-              </label>
-              <Input
-                name={field.name as string}
-                type={fieldProps?.type}
-                defaultValue={fieldProps?.defaultValue}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.currentTarget.value)}
-              />
-              {field.state.meta.errors ? (
-                <em role='alert' className='md:text-sm text-xs text-red-500'>{field.state.meta.errors.join(', ')}</em>
-              ) : null}
-            </>
-          )}
+          children={(field) => {
+            return (
+              <>
+                <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
+                  {labelWithOptonal}
+                </label>
+                <Input
+                  name={field.name as string}
+                  required={fieldProps?.required}
+                  type={fieldProps?.type}
+                  defaultValue={fieldProps?.defaultValue}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => {
+                    return fieldProps?.type === 'number'
+                      ? field.handleChange(parseInt(e.currentTarget.value))
+                      : field.handleChange(e.currentTarget.value);
+                  }}
+                />
+                {field.state.meta.isTouched &&
+                field.state.meta.errors.length ? (
+                  <em
+                    role='alert'
+                    className='md:text-sm text-xs text-red-500'
+                  >
+                    {field.state.meta.errors.join(', ')}
+                  </em>
+                ) : null}
+              </>
+            );
+          }}
         />
       </div>
     );
@@ -70,6 +86,9 @@ const DynamicFormFieldenderer = <TFormData,>({
               </label>
               <Select
                 name={field?.name as string}
+                required={fieldProps?.required}
+                onValueChange={(e) => field.handleChange(e)}
+                onOpenChange={field.handleBlur}
               >
                 <SelectTrigger className='w-full'>
                   <SelectValue placeholder={fieldProps?.placeholder} />
@@ -91,8 +110,13 @@ const DynamicFormFieldenderer = <TFormData,>({
                 </SelectContent>
               </Select>
 
-              {field.state.meta.errors ? (
-                <em role='alert' className='md:text-sm text-xs text-red-500'>{field.state.meta.errors.join(', ')}</em>
+              {field.state.meta.isTouched && field.state.meta.errors.length ? (
+                <em
+                  role='alert'
+                  className='md:text-sm text-xs text-red-500'
+                >
+                  {field.state.meta.errors.join(', ')}
+                </em>
               ) : null}
             </div>
           )}
@@ -113,13 +137,19 @@ const DynamicFormFieldenderer = <TFormData,>({
               </label>
               <Textarea
                 name={field.name as string}
+                required={fieldProps?.required}
                 defaultValue={fieldProps?.defaultValue}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.currentTarget.value)}
               />
 
-              {field.state.meta.errors ? (
-                <em role='alert' className='md:text-sm text-xs text-red-500'>{field.state.meta.errors.join(', ')}</em>
+              {field.state.meta.isTouched && field.state.meta.errors.length ? (
+                <em
+                  role='alert'
+                  className='md:text-sm text-xs text-red-500'
+                >
+                  {field.state.meta.errors.join(', ')}
+                </em>
               ) : null}
             </div>
           )}
