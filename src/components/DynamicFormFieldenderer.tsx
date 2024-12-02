@@ -40,12 +40,7 @@ const DynamicFormFieldenderer = <TFormData,>({
       <div>
         <form.Field
           name={fieldProps?.name}
-          children={(field: {
-            name: string;
-            handleBlur: FocusEventHandler<HTMLInputElement> | undefined;
-            handleChange: (arg0: string) => void;
-            state: { meta: { errors: any[] } };
-          }) => {
+          children={(field) => {
             return (
               <>
                 <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
@@ -53,13 +48,18 @@ const DynamicFormFieldenderer = <TFormData,>({
                 </label>
                 <Input
                   name={field.name as string}
+                  required={fieldProps?.required}
                   type={fieldProps?.type}
                   defaultValue={fieldProps?.defaultValue}
-                  required={fieldProps?.required}
                   onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.currentTarget.value)}
+                  onChange={(e) => {
+                    return fieldProps?.type === 'number'
+                      ? field.handleChange(parseInt(e.currentTarget.value))
+                      : field.handleChange(e.currentTarget.value);
+                  }}
                 />
-                {field.state.meta.errors ? (
+                {field.state.meta.isTouched &&
+                field.state.meta.errors.length ? (
                   <em
                     role='alert'
                     className='md:text-sm text-xs text-red-500'
@@ -88,7 +88,12 @@ const DynamicFormFieldenderer = <TFormData,>({
               <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
                 {labelWithOptonal}
               </label>
-              <Select name={field?.name as string} required={fieldProps?.required}>
+              <Select
+                name={field?.name as string}
+                required={fieldProps?.required}
+                onValueChange={(e) => field.handleChange(e)}
+                onOpenChange={field.handleBlur}
+              >
                 <SelectTrigger className='w-full'>
                   <SelectValue placeholder={fieldProps?.placeholder} />
                 </SelectTrigger>
@@ -109,7 +114,7 @@ const DynamicFormFieldenderer = <TFormData,>({
                 </SelectContent>
               </Select>
 
-              {field.state.meta.errors ? (
+              {field.state.meta.isTouched && field.state.meta.errors.length ? (
                 <em
                   role='alert'
                   className='md:text-sm text-xs text-red-500'
@@ -141,12 +146,13 @@ const DynamicFormFieldenderer = <TFormData,>({
               </label>
               <Textarea
                 name={field.name as string}
-                defaultValue={fieldProps?.defaultValue}
                 required={fieldProps?.required}
+                defaultValue={fieldProps?.defaultValue}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.currentTarget.value)}
               />
-              {field.state.meta.errors ? (
+
+              {field.state.meta.isTouched && field.state.meta.errors.length ? (
                 <em
                   role='alert'
                   className='md:text-sm text-xs text-red-500'
