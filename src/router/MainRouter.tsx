@@ -5,6 +5,7 @@ import Products from '@/pages/Products/Products';
 import ProductDetails from '@/pages/ProductDetails/ProductDetails';
 import ProductManagement from '@/pages/ProductManagement/ProductManagement';
 import AddProduct from '@/pages/AddProduct/AddProduct';
+import AboutUs from '@/pages/AboutUs/AboutUs';
 
 export const MainRoute = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const MainRoute = createBrowserRouter([
         path: 'add-product',
         element: <AddProduct />,
       },
+      {
+        path: 'about',
+        element: <AboutUs />
+      }
     ],
   },
 ]);
