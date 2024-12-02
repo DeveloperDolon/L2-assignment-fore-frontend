@@ -11,9 +11,13 @@ import {
 } from './ui/select';
 import { Textarea } from './ui/textarea';
 import { ZodType, ZodTypeDef } from 'zod';
+import { FocusEventHandler } from 'react';
 
 type DynamicFormFieldendererProps<TFormData> = {
-  form: ReactFormExtendedApi<unknown, Validator<unknown, ZodType<TFormData, ZodTypeDef, unknown>>>;
+  form: ReactFormExtendedApi<
+    unknown,
+    Validator<unknown, ZodType<TFormData, ZodTypeDef, unknown>>
+  >;
   fieldProps: DynamicFormField;
 };
 
@@ -36,23 +40,36 @@ const DynamicFormFieldenderer = <TFormData,>({
       <div>
         <form.Field
           name={fieldProps?.name}
-          children={(field) => (
-            <>
-              <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
-                {labelWithOptonal}
-              </label>
-              <Input
-                name={field.name as string}
-                type={fieldProps?.type}
-                defaultValue={fieldProps?.defaultValue}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.currentTarget.value)}
-              />
-              {field.state.meta.errors ? (
-                <em role='alert' className='md:text-sm text-xs text-red-500'>{field.state.meta.errors.join(', ')}</em>
-              ) : null}
-            </>
-          )}
+          children={(field: {
+            name: string;
+            handleBlur: FocusEventHandler<HTMLInputElement> | undefined;
+            handleChange: (arg0: string) => void;
+            state: { meta: { errors: any[] } };
+          }) => {
+            return (
+              <>
+                <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
+                  {labelWithOptonal}
+                </label>
+                <Input
+                  name={field.name as string}
+                  type={fieldProps?.type}
+                  defaultValue={fieldProps?.defaultValue}
+                  required={fieldProps?.required}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.currentTarget.value)}
+                />
+                {field.state.meta.errors ? (
+                  <em
+                    role='alert'
+                    className='md:text-sm text-xs text-red-500'
+                  >
+                    {field.state.meta.errors.join(', ')}
+                  </em>
+                ) : null}
+              </>
+            );
+          }}
         />
       </div>
     );
@@ -63,14 +80,15 @@ const DynamicFormFieldenderer = <TFormData,>({
       <div>
         <form.Field
           name={fieldProps?.name}
-          children={(field) => (
+          children={(field: {
+            name: string;
+            state: { meta: { errors: any[] } };
+          }) => (
             <div>
               <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
                 {labelWithOptonal}
               </label>
-              <Select
-                name={field?.name as string}
-              >
+              <Select name={field?.name as string} required={fieldProps?.required}>
                 <SelectTrigger className='w-full'>
                   <SelectValue placeholder={fieldProps?.placeholder} />
                 </SelectTrigger>
@@ -92,7 +110,12 @@ const DynamicFormFieldenderer = <TFormData,>({
               </Select>
 
               {field.state.meta.errors ? (
-                <em role='alert' className='md:text-sm text-xs text-red-500'>{field.state.meta.errors.join(', ')}</em>
+                <em
+                  role='alert'
+                  className='md:text-sm text-xs text-red-500'
+                >
+                  {field.state.meta.errors.join(', ')}
+                </em>
               ) : null}
             </div>
           )}
@@ -106,7 +129,12 @@ const DynamicFormFieldenderer = <TFormData,>({
       <div>
         <form.Field
           name={fieldProps?.name as string}
-          children={(field) => (
+          children={(field: {
+            name: string;
+            handleBlur: FocusEventHandler<HTMLTextAreaElement> | undefined;
+            handleChange: (arg0: string) => void;
+            state: { meta: { errors: any[] } };
+          }) => (
             <div>
               <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
                 {labelWithOptonal}
@@ -114,12 +142,17 @@ const DynamicFormFieldenderer = <TFormData,>({
               <Textarea
                 name={field.name as string}
                 defaultValue={fieldProps?.defaultValue}
+                required={fieldProps?.required}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.currentTarget.value)}
               />
-
               {field.state.meta.errors ? (
-                <em role='alert' className='md:text-sm text-xs text-red-500'>{field.state.meta.errors.join(', ')}</em>
+                <em
+                  role='alert'
+                  className='md:text-sm text-xs text-red-500'
+                >
+                  {field.state.meta.errors.join(', ')}
+                </em>
               ) : null}
             </div>
           )}

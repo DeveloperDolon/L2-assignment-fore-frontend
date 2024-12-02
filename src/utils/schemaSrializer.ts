@@ -30,6 +30,7 @@ export const serializeSchemaFromObject = (
       } else if (field?.type === 'number') {
         acc[field.name] = z.number();
       } else {
+        console.log("from non required.");
         acc[field.name] = z.string();
       }
       return acc;

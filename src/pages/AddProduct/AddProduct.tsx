@@ -8,7 +8,7 @@ import { useForm } from '@tanstack/react-form';
 
 const AddProduct = () => {
   const productSchema = serializeSchemaFromObject(addProductFormFields);
-  console.log(productSchema)
+  // console.log(productSchema);
   // type product = z.infer<typeof productSchema>;
 
   const form = useForm({
