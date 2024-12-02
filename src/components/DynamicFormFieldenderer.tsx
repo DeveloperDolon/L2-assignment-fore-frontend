@@ -54,7 +54,9 @@ const DynamicFormFieldenderer = <TFormData,>({
                   onBlur={field.handleBlur}
                   onChange={(e) => {
                     return fieldProps?.type === 'number'
-                      ? field.handleChange(parseInt(e.currentTarget.value))
+                      ? field.handleChange(parseInt(e.currentTarget.value)) 
+                      : fieldProps?.type === 'file' 
+                      ? field.handleChange(e.currentTarget.files)
                       : field.handleChange(e.currentTarget.value);
                   }}
                 />
