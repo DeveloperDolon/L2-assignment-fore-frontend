@@ -7,7 +7,6 @@ type Product = {
   id?: string;
   actualPrice: number;
   name: string;
-  discountPrice: number;
   images: SliderImagesType[];
   discount: number;
   description: string;

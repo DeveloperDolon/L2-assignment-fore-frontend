@@ -20,6 +20,8 @@ const AddProduct = () => {
       onSubmit: productSchema
     },
     onSubmit: async ({ value }) => {
+      value.slider_images = null;
+      console.log(value);
       const response = await storeProduct(value).unwrap();
       console.log(response);
     },

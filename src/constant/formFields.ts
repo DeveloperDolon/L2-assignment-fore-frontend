@@ -16,14 +16,6 @@ export const addProductFormFields: DynamicFormField[] = [
     errorMessage: 'Product actual price need to input!',
   },
   {
-    type: 'number',
-    name: 'discount_price',
-    label: 'Discount price',
-    placeholder: 'Input product discount price',
-    required: true,
-    errorMessage: 'Product discount price must need to input.',
-  },
-  {
     type: 'file',
     name: 'slider_images',
     label: 'Slider images',
@@ -46,12 +38,6 @@ export const addProductFormFields: DynamicFormField[] = [
     placeholder: 'Enter descripition',
     required: true,
     errorMessage: 'Product description must need.',
-  },
-  {
-    type: 'checkbox',
-    name: 'in_stock',
-    label: 'In Stock',
-    required: true,
   },
   {
     type: 'number',
