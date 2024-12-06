@@ -17,7 +17,7 @@ export const addProductFormFields: DynamicFormField[] = [
   },
   {
     type: 'file',
-    name: 'slider_images',
+    name: 'images',
     label: 'Slider images',
     placeholder: 'Input images',
     required: true,
@@ -33,8 +33,8 @@ export const addProductFormFields: DynamicFormField[] = [
   },
   {
     type: 'text',
-    name: 'discription',
-    label: 'Discription',
+    name: 'description',
+    label: 'Description',
     placeholder: 'Enter descripition',
     required: true,
     errorMessage: 'Product description must need.',
@@ -49,28 +49,28 @@ export const addProductFormFields: DynamicFormField[] = [
   },
   {
     type: 'select',
-    name: 'categoryId',
+    name: 'category_id',
     label: 'Category',
     placeholder: 'Select category',
     required: true,
     options: [
       {
         label: 'Xyz',
-        value: 'xyz',
+        value: '6582c0e7dc1157ef019a1914',
       },
     ],
     errorMessage: 'Must need to select category.',
   },
   {
     type: 'select',
-    name: 'brandId',
+    name: 'brand_id',
     label: 'Brand',
     placeholder: 'Select brand',
     required: true,
     options: [
       {
         label: 'Xyz',
-        value: 'xyz',
+        value: '6582c0e7dc1157ef019a1914',
       },
     ],
     errorMessage: 'Must need to select brand.',

@@ -6,12 +6,14 @@ import { serializeSchemaFromObject } from '@/utils/schemaSrializer';
 import { useForm } from '@tanstack/react-form';
 import { Button } from '@/components/ui/button';
 import { useStoreProductMutation } from '@/redux/api/features/product.api';
-// import { z } from 'zod';
+import { z } from 'zod';
+import { makeFormData } from '@/utils/makeFormData';
+
+const productSchema = serializeSchemaFromObject(addProductFormFields);
+type ProductType = z.infer<typeof productSchema>;
 
 const AddProduct = () => {
-  const productSchema = serializeSchemaFromObject(addProductFormFields);
   const [storeProduct] = useStoreProductMutation();
-  // type product = z.infer<typeof productSchema>;
   
   const form = useForm({
     validatorAdapter: zodValidator(),
@@ -19,10 +21,10 @@ const AddProduct = () => {
       onChange: productSchema,
       onSubmit: productSchema
     },
-    onSubmit: async ({ value }) => {
-      value.slider_images = null;
-      console.log(value);
-      const response = await storeProduct(value).unwrap();
+    onSubmit: async ({value} : {value: ProductType}) => {
+      const formData = makeFormData(value);
+
+      const response = await storeProduct(formData).unwrap();
       console.log(response);
     },
   });
