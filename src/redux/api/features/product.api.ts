@@ -3,11 +3,13 @@ import baseApi from '../baseApi';
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     storeProduct: builder.mutation({
-      query: (data) => ({
-        url: '/product',
-        method: 'POST',
-        body: data,
-      }),
+      query: (data) => {
+        return {
+          url: '/product',
+          method: 'POST',
+          body: data,
+        }
+      },
       invalidatesTags: ['product'],
     }),
     productList: builder.query({

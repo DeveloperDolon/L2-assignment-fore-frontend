@@ -22,7 +22,7 @@ const AddProduct = () => {
       onSubmit: productSchema
     },
     onSubmit: async ({value} : {value: ProductType}) => {
-      const formData = makeFormData(value);
+      const formData = makeFormData<ProductType>(value);
 
       const response = await storeProduct(formData).unwrap();
       console.log(response);
