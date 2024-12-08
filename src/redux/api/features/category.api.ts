@@ -1,11 +1,11 @@
-import baseApi from "../baseApi";
+import baseApi from '../baseApi';
 
 const categoryApi = baseApi.injectEndpoints({
-    endpoints: (builder) => ({
-        categoryList: builder.query({
-            query: () => '/category'
-        })
+  endpoints: (builder) => ({
+    categoryList: builder.query({
+      query: () => '/category',
     }),
+  }),
 });
 
-export const {useCategoryListQuery} = categoryApi;
+export const { useCategoryListQuery } = categoryApi;

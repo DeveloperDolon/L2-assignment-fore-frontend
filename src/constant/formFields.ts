@@ -1,3 +1,4 @@
+
 export const addProductFormFields: DynamicFormField[] = [
   {
     type: 'text',
