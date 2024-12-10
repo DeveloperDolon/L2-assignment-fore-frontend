@@ -9,11 +9,15 @@ import { useStoreProductMutation } from '@/redux/api/features/product.api';
 import { z } from 'zod';
 import { makeFormData } from '@/utils/makeFormData';
 import { BlinkBlur } from 'react-loading-indicators';
+import { useToast } from '@/hooks/use-toast';
+import { ToastAction } from '@/components/ui/toast';
 
 const productSchema = serializeSchemaFromObject(addProductFormFields);
 type ProductType = z.infer<typeof productSchema>;
 
 const AddProduct = () => {
+  const { toast } = useToast();
+
   const [storeProduct, { isLoading: isProductAdding }] =
     useStoreProductMutation();
 
@@ -26,8 +30,26 @@ const AddProduct = () => {
     onSubmit: async ({ value }: { value: ProductType }) => {
       const formData = makeFormData<ProductType>(value);
 
-      const response = await storeProduct(formData).unwrap();
-      console.log(response);
+      try {
+        await storeProduct(formData).unwrap();
+        form.reset();
+        toast({
+          title: "Success",
+          description: "Product has been added.",
+          action: (
+            <ToastAction altText="Goto schedule to undo">Okey</ToastAction>
+          ),
+        });
+      } catch (err: unknown) {
+        toast({
+          title: "Failied",
+          description: err?.message,
+          action: (
+            <ToastAction altText="Goto schedule to undo">Okey</ToastAction>
+          ),
+          variant: 'destructive'
+        });
+      }
     },
   });
 
