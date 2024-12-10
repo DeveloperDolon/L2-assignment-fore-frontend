@@ -1,24 +1,19 @@
-type SliderImagesType = {
-  caption: string;
-  image: string | File;
-};
-
 type Product = {
   id?: string;
-  actualPrice: number;
-  name: string;
-  discountPrice: number;
-  images: SliderImagesType[];
+  actual_price: number;
+  product_name: string;
+  images: string;
   discount: number;
   description: string;
   inStock: boolean;
   quantity: number;
-  categoryId: string;
-  brandId: string;
-  averageRating: number;
-  reviewCount: number;
+  category_id: string;
+  brand_id: string;
+  average_rating: number;
+  review_count: number;
   warranty: string;
   policies: string;
+  is_deleted: boolean;
 };
 
 type Review = {

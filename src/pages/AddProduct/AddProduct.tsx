@@ -5,25 +5,44 @@ import { zodValidator } from '@tanstack/zod-form-adapter';
 import { serializeSchemaFromObject } from '@/utils/schemaSrializer';
 import { useForm } from '@tanstack/react-form';
 import { Button } from '@/components/ui/button';
-// import { z } from 'zod';
+import { useStoreProductMutation } from '@/redux/api/features/product.api';
+import { z } from 'zod';
+import { makeFormData } from '@/utils/makeFormData';
+import { BlinkBlur } from 'react-loading-indicators';
+
+const productSchema = serializeSchemaFromObject(addProductFormFields);
+type ProductType = z.infer<typeof productSchema>;
 
 const AddProduct = () => {
-  const productSchema = serializeSchemaFromObject(addProductFormFields);
-  // type product = z.infer<typeof productSchema>;
-  
+  const [storeProduct, { isLoading: isProductAdding }] =
+    useStoreProductMutation();
+
   const form = useForm({
     validatorAdapter: zodValidator(),
     validators: {
       onChange: productSchema,
-      onSubmit: productSchema
+      onSubmit: productSchema,
     },
-    onSubmit: async ({ value }) => {
-      console.log(value);
+    onSubmit: async ({ value }: { value: ProductType }) => {
+      const formData = makeFormData<ProductType>(value);
+
+      const response = await storeProduct(formData).unwrap();
+      console.log(response);
     },
   });
-  
+
   return (
-    <MyContainer>
+    <MyContainer className='relative'>
+      {isProductAdding && (
+        <div className='absolute w-full h-[calc(100vh-300px)] z-30 bg-opacity-50 flex justify-center items-center'>
+          <BlinkBlur
+            color='#32cd32'
+            size='medium'
+            text=''
+            textColor=''
+          />
+        </div>
+      )}
       <h1 className='md:text-6xl sm:text-5xl text-4xl md:mt-5 mt-4 md:mb-7 mb-5 font-semibold font-secondary text-center'>
         Add Product
       </h1>
@@ -45,7 +64,12 @@ const AddProduct = () => {
         ))}
 
         <div className='flex justify-center col-span-full md:mt-3 mt-2'>
-          <Button className='hover:bg-red-800 bg-red-500 text-white' type='submit'>Submit</Button>
+          <Button
+            className='hover:bg-red-800 bg-red-500 text-white'
+            type='submit'
+          >
+            Submit
+          </Button>
         </div>
       </form>
     </MyContainer>

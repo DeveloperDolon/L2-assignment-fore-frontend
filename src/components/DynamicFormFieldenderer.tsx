@@ -11,6 +11,7 @@ import {
 } from './ui/select';
 import { Textarea } from './ui/textarea';
 import { ZodType, ZodTypeDef } from 'zod';
+import { FocusEventHandler } from 'react';
 
 type DynamicFormFieldendererProps<TFormData> = {
   form: ReactFormExtendedApi<
@@ -53,7 +54,9 @@ const DynamicFormFieldenderer = <TFormData,>({
                   onBlur={field.handleBlur}
                   onChange={(e) => {
                     return fieldProps?.type === 'number'
-                      ? field.handleChange(parseInt(e.currentTarget.value))
+                      ? field.handleChange(parseInt(e.currentTarget.value)) 
+                      : fieldProps?.type === 'file' 
+                      ? field.handleChange(e.currentTarget.files)
                       : field.handleChange(e.currentTarget.value);
                   }}
                 />
@@ -79,7 +82,10 @@ const DynamicFormFieldenderer = <TFormData,>({
       <div>
         <form.Field
           name={fieldProps?.name}
-          children={(field) => (
+          children={(field: {
+            name: string;
+            state: { meta: { errors: any[] } };
+          }) => (
             <div>
               <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
                 {labelWithOptonal}
@@ -130,7 +136,12 @@ const DynamicFormFieldenderer = <TFormData,>({
       <div>
         <form.Field
           name={fieldProps?.name as string}
-          children={(field) => (
+          children={(field: {
+            name: string;
+            handleBlur: FocusEventHandler<HTMLTextAreaElement> | undefined;
+            handleChange: (arg0: string) => void;
+            state: { meta: { errors: any[] } };
+          }) => (
             <div>
               <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
                 {labelWithOptonal}
