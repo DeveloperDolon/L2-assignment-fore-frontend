@@ -1,4 +1,3 @@
-
 export const addProductFormFields: DynamicFormField[] = [
   {
     type: 'text',
@@ -50,28 +49,26 @@ export const addProductFormFields: DynamicFormField[] = [
   },
   {
     type: 'select',
-    name: 'category_id',
-    label: 'Category',
-    placeholder: 'Select category',
-    required: true,
-    options: [
-      {
-        label: 'Xyz',
-        value: '6582c0e7dc1157ef019a1914',
-      },
-    ],
-    errorMessage: 'Must need to select category.',
-  },
-  {
-    type: 'select',
-    name: 'brand_id',
+    name: 'brand',
     label: 'Brand',
     placeholder: 'Select brand',
     required: true,
     options: [
       {
-        label: 'Xyz',
-        value: '6582c0e7dc1157ef019a1914',
+        label: 'Life Fitness',
+        value: 'Life Fitness',
+      },
+      {
+        label: 'Precor',
+        value: 'Precor',
+      },
+      {
+        label: 'Matrix',
+        value: 'Matrix',
+      },
+      {
+        label: 'StairMaster',
+        value: 'StairMaster',
       },
     ],
     errorMessage: 'Must need to select brand.',

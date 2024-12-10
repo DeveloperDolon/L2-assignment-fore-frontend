@@ -11,6 +11,7 @@ import { makeFormData } from '@/utils/makeFormData';
 import { BlinkBlur } from 'react-loading-indicators';
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
+import { useCategoryListQuery } from '@/redux/api/features/category.api';
 
 const productSchema = serializeSchemaFromObject(addProductFormFields);
 type ProductType = z.infer<typeof productSchema>;
@@ -20,6 +21,10 @@ const AddProduct = () => {
 
   const [storeProduct, { isLoading: isProductAdding }] =
     useStoreProductMutation();
+  const {
+    data: categories,
+    isLoading: productDataLoading
+  } = useCategoryListQuery(1);
 
   const form = useForm({
     validatorAdapter: zodValidator(),
@@ -33,25 +38,40 @@ const AddProduct = () => {
       try {
         await storeProduct(formData).unwrap();
         form.reset();
-        toast({
-          title: "Success",
-          description: "Product has been added.",
+        return toast({
+          title: 'Success',
+          description: 'Product has been added.',
           action: (
-            <ToastAction altText="Goto schedule to undo">Okey</ToastAction>
+            <ToastAction altText='Goto schedule to undo'>Okey</ToastAction>
           ),
         });
       } catch (err: unknown) {
-        toast({
-          title: "Failied",
-          description: err?.message,
+        console.log(err);
+        return toast({
+          variant: 'destructive',
+          title: 'Failied',
+          description: err?.data?.message,
           action: (
-            <ToastAction altText="Goto schedule to undo">Okey</ToastAction>
-          ),
-          variant: 'destructive'
+            <ToastAction altText='Goto schedule to undo'>Okey</ToastAction>
+          )
         });
       }
     },
   });
+
+  if (!productDataLoading) {
+    if (!addProductFormFields.some((field) => field.name === 'category_id')) {
+      addProductFormFields.unshift({
+        type: 'select',
+        name: 'category_id',
+        label: 'Category',
+        placeholder: 'Select category',
+        required: true,
+        options: categories?.data,
+        errorMessage: 'Must need to select category.',
+      });
+    }
+  }
 
   return (
     <MyContainer className='relative'>

@@ -35,9 +35,8 @@ type Brand = {
 };
 
 type Category = {
-  id?: string;
-  name: string;
-  image: string | File;
+  _id?: string;
+  name?: string;
 };
 
 type User = {
@@ -69,5 +68,10 @@ type DynamicFormField = {
   placeholder?: string;
   required?: boolean;
   errorMessage?: string;
-  options?: {value?: string | number; label: string;}[];
+  options?: {
+    value?: string | number; 
+    label?: string;
+    _id?: string;
+  name?: string;
+  }[];
 };
