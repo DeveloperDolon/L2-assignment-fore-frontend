@@ -58,10 +58,17 @@ type ProductOption = {
   }[];
 };
 
-type DynamicFormFieldType = 'checkbox' | 'text' | 'textarea' | 'select' | 'date' | 'number' | 'file';
+type DynamicFormFieldType =
+  | 'checkbox'
+  | 'text'
+  | 'textarea'
+  | 'select'
+  | 'date'
+  | 'number'
+  | 'file';
 
 type DynamicFormField = {
-  type : DynamicFormFieldType;
+  type: DynamicFormFieldType;
   name: string;
   label?: string;
   defaultValue?: string | number;
@@ -69,9 +76,9 @@ type DynamicFormField = {
   required?: boolean;
   errorMessage?: string;
   options?: {
-    value?: string | number; 
+    value?: string | number;
     label?: string;
     _id?: string;
-  name?: string;
+    name?: string;
   }[];
 };

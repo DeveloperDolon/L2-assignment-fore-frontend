@@ -21,10 +21,8 @@ const AddProduct = () => {
 
   const [storeProduct, { isLoading: isProductAdding }] =
     useStoreProductMutation();
-  const {
-    data: categories,
-    isLoading: productDataLoading
-  } = useCategoryListQuery(1);
+  const { data: categories, isLoading: productDataLoading } =
+    useCategoryListQuery(1);
 
   const form = useForm({
     validatorAdapter: zodValidator(),
@@ -53,7 +51,7 @@ const AddProduct = () => {
           description: err?.data?.message,
           action: (
             <ToastAction altText='Goto schedule to undo'>Okey</ToastAction>
-          )
+          ),
         });
       }
     },
