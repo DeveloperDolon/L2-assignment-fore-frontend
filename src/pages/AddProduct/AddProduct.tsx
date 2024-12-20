@@ -35,7 +35,7 @@ const AddProduct = () => {
 
       try {
         await storeProduct(formData).unwrap();
-        form.reset();
+
         return toast({
           title: 'Success',
           description: 'Product has been added.',
@@ -44,7 +44,6 @@ const AddProduct = () => {
           ),
         });
       } catch (err: unknown) {
-        console.log(err);
         return toast({
           variant: 'destructive',
           title: 'Failied',
