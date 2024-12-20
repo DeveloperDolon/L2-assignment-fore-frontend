@@ -8,15 +8,18 @@ const productApi = baseApi.injectEndpoints({
           url: '/product',
           method: 'POST',
           body: data,
-        }
+        };
       },
       invalidatesTags: ['product'],
     }),
     productList: builder.query({
-      query: ({ page, search }) => `/product?page=${page}&search=${search}`,
+      query: (queryParams) => ({
+        url: `/product`,
+        params: queryParams
+      }),
       providesTags: ['product'],
     }),
   }),
 });
 
-export const { useStoreProductMutation } = productApi;
+export const { useStoreProductMutation, useProductListQuery } = productApi;

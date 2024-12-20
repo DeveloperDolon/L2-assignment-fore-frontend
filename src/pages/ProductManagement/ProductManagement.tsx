@@ -35,6 +35,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Link } from 'react-router-dom';
+import { useProductListQuery } from '@/redux/api/features/product.api';
 
 const data: Payment[] = [
   {
@@ -101,7 +102,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: 'status',
-    header: 'Status',
+    header: 'Product Name',
     cell: ({ row }) => (
       <div className='capitalize'>{row.getValue('status')}</div>
     ),
@@ -114,7 +115,7 @@ export const columns: ColumnDef<Payment>[] = [
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Email
+          Category
           <ArrowUpDown />
         </Button>
       );
@@ -123,7 +124,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: 'amount',
-    header: () => <div className='text-right'>Amount</div>,
+    header: () => <div className='text-right'>Price</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue('amount'));
 
@@ -174,6 +175,8 @@ export const columns: ColumnDef<Payment>[] = [
 ];
 
 const ProductManagement = () => {
+  const {data: products} = useProductListQuery({page: 1});
+  console.log(products);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
