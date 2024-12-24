@@ -148,7 +148,8 @@ const Products = () => {
             </Select>
           </div>
 
-          <label
+            {/* Price slider is here */}
+          {/* <label
             className='mt-5 md:text-sm text-xs font-semibold text-center w-full block'
             htmlFor=''
           >
@@ -161,14 +162,13 @@ const Products = () => {
             </div>
             <div className='mt-1 bg-[#cfcbcb] rounded-full'>
               <Slider
-                name='price'
                 defaultValue={[50]}
                 max={100}
                 step={1}
                 className={cn('w-[100%] text-yellow-500')}
               />
             </div>
-          </div>
+          </div> */}
 
           <SidebarProvider className='mt-5'>
             <SidebarMenu>
