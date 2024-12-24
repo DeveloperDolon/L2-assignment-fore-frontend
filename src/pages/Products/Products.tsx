@@ -39,10 +39,20 @@ import {
 import { cn } from '@/lib/utils';
 import { Slider } from '@/components/ui/slider';
 import { useProductListQuery } from '@/redux/api/features/product.api';
+import { useState } from 'react';
 
 const Products = () => {
-  const {data: products } = useProductListQuery({page: 1});
-  console.log(products);
+  const [searchFiltering, setSearchFiltering] = useState({
+    category: null,
+    inStock: null,
+    sortBy: null,
+    search: null,
+  });
+  const { data: products } = useProductListQuery({
+    page: 1,
+    ...searchFiltering,
+  });
+
   return (
     <MyContainer>
       <p className='md:text-sm text-xs font-semibold md:mt-3 mt-2 italic'>
@@ -57,8 +67,32 @@ const Products = () => {
       </h1>
 
       <div className='grid md:grid-cols-8 grid-cols-1 md:gap-10 gap-0'>
-        <div className='md:col-span-2'>
-          <Button className='bg-yellow-500 mb-4 hover:bg-yellow-300'>
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          onChange={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const { name, value } = e.target as HTMLInputElement;
+
+            setSearchFiltering((prev) => ({
+              ...prev,
+              [name]: value,
+            }));
+          }}
+          className='md:col-span-2'
+        >
+          <Button
+            onClick={() =>
+              setSearchFiltering({
+                category: null,
+                inStock: null,
+                sortBy: null,
+                search: null,
+              })
+            }
+            className='bg-yellow-500 mb-4 hover:bg-yellow-300'
+          >
             Clear Filter
           </Button>
 
@@ -67,6 +101,7 @@ const Products = () => {
               className='placeholder:text-gray-400'
               type='text'
               placeholder='Search results'
+              name='search'
             />
             <Button
               size={'icon'}
@@ -80,7 +115,7 @@ const Products = () => {
           </div>
 
           <div>
-            <Select>
+            <Select name='sort'>
               <SelectTrigger className='w-full'>
                 <SelectValue placeholder='Sort' />
               </SelectTrigger>
@@ -126,6 +161,7 @@ const Products = () => {
             </div>
             <div className='mt-1 bg-[#cfcbcb] rounded-full'>
               <Slider
+                name='price'
                 defaultValue={[50]}
                 max={100}
                 step={1}
@@ -158,6 +194,12 @@ const Products = () => {
                                 <Checkbox
                                   id='terms2'
                                   value={submenu?.value}
+                                  name={
+                                    submenu?.label == 'In stock' ||
+                                    submenu?.label == 'Out of stock'
+                                      ? 'inStock'
+                                      : 'category'
+                                  }
                                 />
                                 <label
                                   htmlFor='terms2'
@@ -177,10 +219,14 @@ const Products = () => {
               ))}
             </SidebarMenu>
           </SidebarProvider>
-        </div>
+        </form>
+
         <div className='md:col-span-6 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 md:gap-8 gap-6'>
-          {products?.data?.map((item : Product) => (
-            <ProductCard key={item?._id} product={item}  />
+          {products?.data?.map((item: Product) => (
+            <ProductCard
+              key={item?._id}
+              product={item}
+            />
           ))}
 
           <div className='col-span-full md:mt-5 mt-3 mx-auto'>
