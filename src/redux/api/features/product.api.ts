@@ -8,15 +8,28 @@ const productApi = baseApi.injectEndpoints({
           url: '/product',
           method: 'POST',
           body: data,
-        }
+        };
       },
       invalidatesTags: ['product'],
     }),
     productList: builder.query({
-      query: ({ page, search }) => `/product?page=${page}&search=${search}`,
+      query: (queryParams) => {
+        const cleanedParams = Object.fromEntries(
+          Object.entries(queryParams).filter(([_, value]) => value != null),
+        );
+
+        return {
+          url: `/product`,
+          params: cleanedParams,
+        };
+      },
       providesTags: ['product'],
     }),
+    showProduct: builder.query({
+      query: (productId) => `/product/${productId}`,
+      providesTags: ['product']
+    })
   }),
 });
 
-export const { useStoreProductMutation } = productApi;
+export const { useStoreProductMutation, useProductListQuery, useShowProductQuery } = productApi;

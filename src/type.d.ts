@@ -1,5 +1,5 @@
 type Product = {
-  id?: string;
+  _id?: string;
   actual_price: number;
   product_name: string;
   images: string;
@@ -35,9 +35,8 @@ type Brand = {
 };
 
 type Category = {
-  id?: string;
-  name: string;
-  image: string | File;
+  _id?: string;
+  name?: string;
 };
 
 type User = {
@@ -59,15 +58,27 @@ type ProductOption = {
   }[];
 };
 
-type DynamicFormFieldType = 'checkbox' | 'text' | 'textarea' | 'select' | 'date' | 'number' | 'file';
+type DynamicFormFieldType =
+  | 'checkbox'
+  | 'text'
+  | 'textarea'
+  | 'select'
+  | 'date'
+  | 'number'
+  | 'file';
 
 type DynamicFormField = {
-  type : DynamicFormFieldType;
+  type: DynamicFormFieldType;
   name: string;
   label?: string;
   defaultValue?: string | number;
   placeholder?: string;
   required?: boolean;
   errorMessage?: string;
-  options?: {value?: string | number; label: string;}[];
+  options?: {
+    value?: string | number;
+    label?: string;
+    _id?: string;
+    name?: string;
+  }[];
 };

@@ -77,7 +77,61 @@ const DynamicFormFieldenderer = <TFormData,>({
     );
   }
 
-  if (fieldProps?.type === 'select') {
+  if (fieldProps?.type === 'select' && fieldProps?.name === 'category_id') {
+    return (
+      <div>
+        <form.Field
+          name={fieldProps?.name}
+          children={(field: {
+            name: string;
+            state: { meta: { errors: any[] } };
+          }) => (
+            <div>
+              <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
+                {labelWithOptonal}
+              </label>
+              <Select
+                name={field?.name as string}
+                required={fieldProps?.required}
+                onValueChange={(e) => field.handleChange(e)}
+                onOpenChange={field.handleBlur}
+              >
+                <SelectTrigger className='w-full'>
+                  <SelectValue placeholder={fieldProps?.placeholder} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup className='bg-white'>
+                    <SelectLabel>{fieldProps?.label}</SelectLabel>
+                    {fieldProps?.options?.map((item, idx) => (
+                      <SelectItem
+                        key={idx}
+                        value={
+                          item?.name !== undefined ? String(item._id) : ''
+                        }
+                      >
+                        {item?.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+
+              {field.state.meta.isTouched && field.state.meta.errors.length ? (
+                <em
+                  role='alert'
+                  className='md:text-sm text-xs text-red-500'
+                >
+                  {field.state.meta.errors.join(', ')}
+                </em>
+              ) : null}
+            </div>
+          )}
+        />
+      </div>
+    );
+  }
+
+  if (fieldProps?.type === 'select' && fieldProps?.name !== 'category_id') {
     return (
       <div>
         <form.Field

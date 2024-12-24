@@ -35,6 +35,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Link } from 'react-router-dom';
+import { useProductListQuery } from '@/redux/api/features/product.api';
+import { BlinkBlur } from 'react-loading-indicators';
 
 const data: Payment[] = [
   {
@@ -76,7 +78,7 @@ export type Payment = {
   email: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Product>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -100,32 +102,34 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
+    accessorKey: 'product_name',
+    header: 'Product Name',
     cell: ({ row }) => (
-      <div className='capitalize'>{row.getValue('status')}</div>
+      <div className='capitalize'>{row.getValue('product_name')}</div>
     ),
   },
   {
-    accessorKey: 'email',
+    accessorKey: 'category_id',
     header: ({ column }) => {
       return (
         <Button
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Email
+          Category
           <ArrowUpDown />
         </Button>
       );
     },
-    cell: ({ row }) => <div className='lowercase'>{row.getValue('email')}</div>,
+    cell: ({ row }) => (
+      <div className='lowercase'>{row.getValue('category_id')}</div>
+    ),
   },
   {
-    accessorKey: 'amount',
-    header: () => <div className='text-right'>Amount</div>,
+    accessorKey: 'actual_price',
+    header: () => <div className='text-right'>Actural Price</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('amount'));
+      const amount = parseFloat(row.getValue('actual_price'));
 
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat('en-US', {
@@ -159,7 +163,9 @@ export const columns: ColumnDef<Payment>[] = [
           >
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() =>
+                navigator.clipboard.writeText(payment._id as string)
+              }
             >
               Copy payment ID
             </DropdownMenuItem>
@@ -174,6 +180,10 @@ export const columns: ColumnDef<Payment>[] = [
 ];
 
 const ProductManagement = () => {
+  const { data: products, isLoading: isProductFetching } = useProductListQuery({
+    page: 1,
+  });
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -183,7 +193,7 @@ const ProductManagement = () => {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
+    data: products?.data,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -201,6 +211,21 @@ const ProductManagement = () => {
     },
   });
 
+  if (isProductFetching) {
+    return (
+      <div className='relative h-[calc(100vh-300px)] w-full'>
+        <div className='absolute w-full h-[calc(100vh-300px)] z-30 bg-opacity-50 flex justify-center items-center'>
+          <BlinkBlur
+            color='#32cd32'
+            size='medium'
+            text=''
+            textColor=''
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <MyContainer>
       <h1 className='font-secondary md:text-6xl sm:text-5xl text-4xl font-semibold text-center md:mt-7 mt-5 '>
@@ -211,12 +236,15 @@ const ProductManagement = () => {
         <div className='flex items-center justify-between py-4'>
           <div className='flex items-center py-4 flex-1'>
             <Input
-              placeholder='Filter emails...'
+              placeholder='Filter category_id...'
               value={
-                (table.getColumn('email')?.getFilterValue() as string) ?? ''
+                (table.getColumn('category_id')?.getFilterValue() as string) ??
+                ''
               }
               onChange={(event) =>
-                table.getColumn('email')?.setFilterValue(event.target.value)
+                table
+                  .getColumn('category_id')
+                  ?.setFilterValue(event.target.value)
               }
               className='max-w-sm'
             />
