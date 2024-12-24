@@ -3,7 +3,7 @@ import RatingStar from './RatingStar';
 const ProductCard = ({ product }: { product: Product }) => {
   const productDiscountSum = product?.actual_price - product?.discount;
   return (
-    <div className='border p-6 relative'>
+    <div className='border p-6 relative h-fit'>
       <div className='absolute bg-black font-secondary px-3 py-1 right-6 rounded-sm text-white top-6 w-fit'>
         SALE
       </div>

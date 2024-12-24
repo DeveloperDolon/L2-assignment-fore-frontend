@@ -44,9 +44,9 @@ import { useState } from 'react';
 const Products = () => {
   const [searchFiltering, setSearchFiltering] = useState({
     category: null,
-    inStock: null,
-    sortBy: null,
-    search: null,
+    in_stock: null,
+    sort: null,
+    searchTerm: null,
   });
   const { data: products } = useProductListQuery({
     page: 1,
@@ -86,9 +86,9 @@ const Products = () => {
             onClick={() =>
               setSearchFiltering({
                 category: null,
-                inStock: null,
-                sortBy: null,
-                search: null,
+                in_stock: null,
+                sort: null,
+                searchTerm: null,
               })
             }
             className='bg-yellow-500 mb-4 hover:bg-yellow-300'
@@ -101,7 +101,7 @@ const Products = () => {
               className='placeholder:text-gray-400'
               type='text'
               placeholder='Search results'
-              name='search'
+              name='searchTerm'
             />
             <Button
               size={'icon'}
@@ -197,7 +197,7 @@ const Products = () => {
                                   name={
                                     submenu?.label == 'In stock' ||
                                     submenu?.label == 'Out of stock'
-                                      ? 'inStock'
+                                      ? 'in_stock'
                                       : 'category'
                                   }
                                 />

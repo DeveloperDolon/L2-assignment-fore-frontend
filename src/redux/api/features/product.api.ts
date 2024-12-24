@@ -13,10 +13,16 @@ const productApi = baseApi.injectEndpoints({
       invalidatesTags: ['product'],
     }),
     productList: builder.query({
-      query: (queryParams) => ({
-        url: `/product`,
-        params: queryParams
-      }),
+      query: (queryParams) => {
+        const cleanedParams = Object.fromEntries(
+          Object.entries(queryParams).filter(([_, value]) => value != null),
+        );
+
+        return {
+          url: `/product`,
+          params: cleanedParams,
+        };
+      },
       providesTags: ['product'],
     }),
   }),
