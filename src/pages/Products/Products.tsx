@@ -38,8 +38,11 @@ import {
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { Slider } from '@/components/ui/slider';
+import { useProductListQuery } from '@/redux/api/features/product.api';
 
 const Products = () => {
+  const {data: products } = useProductListQuery({page: 1});
+  console.log(products);
   return (
     <MyContainer>
       <p className='md:text-sm text-xs font-semibold md:mt-3 mt-2 italic'>
@@ -176,8 +179,8 @@ const Products = () => {
           </SidebarProvider>
         </div>
         <div className='md:col-span-6 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 md:gap-8 gap-6'>
-          {[1, 2, 3, 4, 5].map((item) => (
-            <ProductCard key={item} />
+          {products?.data?.map((item : Product) => (
+            <ProductCard key={item?._id} product={item}  />
           ))}
 
           <div className='col-span-full md:mt-5 mt-3 mx-auto'>
