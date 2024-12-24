@@ -12,13 +12,14 @@ import { BlinkBlur } from 'react-loading-indicators';
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
 import { useCategoryListQuery } from '@/redux/api/features/category.api';
+import { useNavigate } from 'react-router-dom';
 
 const productSchema = serializeSchemaFromObject(addProductFormFields);
 type ProductType = z.infer<typeof productSchema>;
 
 const AddProduct = () => {
   const { toast } = useToast();
-
+  const navigate = useNavigate();
   const [storeProduct, { isLoading: isProductAdding }] =
     useStoreProductMutation();
   const { data: categories, isLoading: productDataLoading } =
@@ -36,13 +37,14 @@ const AddProduct = () => {
       try {
         await storeProduct(formData).unwrap();
 
-        return toast({
+        toast({
           title: 'Success',
           description: 'Product has been added.',
           action: (
             <ToastAction altText='Goto schedule to undo'>Okey</ToastAction>
           ),
         });
+        return navigate('/product-management');
       } catch (err: unknown) {
         return toast({
           variant: 'destructive',
