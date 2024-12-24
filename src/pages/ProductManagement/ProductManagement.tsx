@@ -36,6 +36,7 @@ import {
 } from '@/components/ui/table';
 import { Link } from 'react-router-dom';
 import { useProductListQuery } from '@/redux/api/features/product.api';
+import { BlinkBlur } from 'react-loading-indicators';
 
 const data: Payment[] = [
   {
@@ -120,7 +121,9 @@ export const columns: ColumnDef<Product>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className='lowercase'>{row.getValue('category_id')}</div>,
+    cell: ({ row }) => (
+      <div className='lowercase'>{row.getValue('category_id')}</div>
+    ),
   },
   {
     accessorKey: 'actual_price',
@@ -160,7 +163,9 @@ export const columns: ColumnDef<Product>[] = [
           >
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment._id as string)}
+              onClick={() =>
+                navigator.clipboard.writeText(payment._id as string)
+              }
             >
               Copy payment ID
             </DropdownMenuItem>
@@ -175,8 +180,10 @@ export const columns: ColumnDef<Product>[] = [
 ];
 
 const ProductManagement = () => {
-  const {data: products} = useProductListQuery({page: 1});
-  console.log(products);
+  const { data: products, isLoading: isProductFetching } = useProductListQuery({
+    page: 1,
+  });
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -204,6 +211,21 @@ const ProductManagement = () => {
     },
   });
 
+  if (isProductFetching) {
+    return (
+      <div className='relative h-[calc(100vh-300px)] w-full'>
+        <div className='absolute w-full h-[calc(100vh-300px)] z-30 bg-opacity-50 flex justify-center items-center'>
+          <BlinkBlur
+            color='#32cd32'
+            size='medium'
+            text=''
+            textColor=''
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <MyContainer>
       <h1 className='font-secondary md:text-6xl sm:text-5xl text-4xl font-semibold text-center md:mt-7 mt-5 '>
@@ -216,10 +238,13 @@ const ProductManagement = () => {
             <Input
               placeholder='Filter category_id...'
               value={
-                (table.getColumn('category_id')?.getFilterValue() as string) ?? ''
+                (table.getColumn('category_id')?.getFilterValue() as string) ??
+                ''
               }
               onChange={(event) =>
-                table.getColumn('category_id')?.setFilterValue(event.target.value)
+                table
+                  .getColumn('category_id')
+                  ?.setFilterValue(event.target.value)
               }
               className='max-w-sm'
             />
