@@ -1,13 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import RatingStar from './RatingStar';
 
 const ProductCard = ({ product }: { product: Product }) => {
   const productDiscountSum = product?.actual_price - product?.discount;
+  const navigate = useNavigate();
+
   return (
     <div className='border p-6 relative h-fit'>
       <div className='absolute bg-black font-secondary px-3 py-1 right-6 rounded-sm text-white top-6 w-fit'>
         SALE
       </div>
-      <div>
+      <div className='cursor-pointer' onClick={() => navigate(`/product/${product?._id}`)}>
         <img
           alt='product-image'
           className='h-[180px] md:h-[250px] object-cover sm:h-[200px] w-full'

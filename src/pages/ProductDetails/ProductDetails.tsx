@@ -1,7 +1,7 @@
 import MyContainer from '@/components/MyContainer/MyContainer';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import RatingStar from '@/components/RatingStar';
 import { Button } from '@/components/ui/button';
 import { RiMoneyDollarCircleLine } from 'react-icons/ri';
@@ -19,10 +19,13 @@ import {
 import ProductCard from '@/components/ProductCard';
 import Review from './Review';
 import CartDrawer from '../../components/CartDrawer';
+import { useShowProductQuery } from '@/redux/api/features/product.api';
 
 const ProductDetails = () => {
+  const {id} = useParams();
   const [quantityCount, setQuantityCount] = useState(1);
-
+  const {data: productDetails} = useShowProductQuery(id);
+  console.log(productDetails)
   return (
     <MyContainer>
       <div className='grid md:grid-cols-2 grid-cols-1 md:gap-16 sm:gap-14 gap-10'>
@@ -34,7 +37,7 @@ const ProductDetails = () => {
             <div>
               <img
                 // className='w-full md:h-[400px] h-[300px]'
-                src='https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+                src={productDetails?.data?.images}
               />
               <p className='legend'>Legend 1</p>
             </div>
