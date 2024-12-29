@@ -18,7 +18,6 @@ import {
 } from '@/components/ui/carousel';
 import ProductCard from '@/components/ProductCard';
 import Review from './Review';
-import CartDrawer from '../../components/CartDrawer';
 import { useProductListQuery, useShowProductQuery } from '@/redux/api/features/product.api';
 
 const ProductDetails = () => {
@@ -198,8 +197,6 @@ const ProductDetails = () => {
           <Review key={item} />
         ))}
       </div>
-
-      <CartDrawer />
     </MyContainer>
   );
 };

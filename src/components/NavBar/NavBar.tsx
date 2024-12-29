@@ -1,9 +1,8 @@
 import MyContainer from '../MyContainer/MyContainer';
 import logoImage from '../../assets/logo.png';
 import { NavLink } from 'react-router-dom';
-import { IoCart } from 'react-icons/io5';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import CartDrawer from '../CartDrawer';
 
 const NavBar = () => {
   return (
@@ -88,9 +87,7 @@ const NavBar = () => {
           >
             1
           </Badge>
-          <Button size={'sm'}>
-            <IoCart className='md:text-2xl text-xl' />
-          </Button>
+          <CartDrawer />
         </div>
       </MyContainer>
     </div>
