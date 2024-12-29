@@ -36,8 +36,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
-import { Slider } from '@/components/ui/slider';
+// import { cn } from '@/lib/utils';
+// import { Slider } from '@/components/ui/slider';
 import { useProductListQuery } from '@/redux/api/features/product.api';
 import { useState } from 'react';
 

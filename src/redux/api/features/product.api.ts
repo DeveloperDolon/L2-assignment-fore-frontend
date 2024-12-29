@@ -27,9 +27,13 @@ const productApi = baseApi.injectEndpoints({
     }),
     showProduct: builder.query({
       query: (productId) => `/product/${productId}`,
-      providesTags: ['product']
-    })
+      providesTags: ['product'],
+    }),
   }),
 });
 
-export const { useStoreProductMutation, useProductListQuery, useShowProductQuery } = productApi;
+export const {
+  useStoreProductMutation,
+  useProductListQuery,
+  useShowProductQuery,
+} = productApi;
