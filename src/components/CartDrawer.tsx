@@ -12,10 +12,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
+import { useSelector } from 'react-redux';
 
 const CartDrawer = () => {
   const [goal, setGoal] = React.useState(350);
-
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
   function onClick(adjustment: number) {
     setGoal(Math.max(200, Math.min(400, goal + adjustment)));
   }
