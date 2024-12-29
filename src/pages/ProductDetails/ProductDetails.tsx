@@ -18,14 +18,14 @@ import {
 } from '@/components/ui/carousel';
 import ProductCard from '@/components/ProductCard';
 import Review from './Review';
-import CartDrawer from '../../components/CartDrawer';
-import { useShowProductQuery } from '@/redux/api/features/product.api';
+import { useProductListQuery, useShowProductQuery } from '@/redux/api/features/product.api';
 
 const ProductDetails = () => {
   const {id} = useParams();
   const [quantityCount, setQuantityCount] = useState(1);
   const {data: productDetails} = useShowProductQuery(id);
-  console.log(productDetails)
+  const {data: products} = useProductListQuery({page: 1});
+  
   return (
     <MyContainer>
       <div className='grid md:grid-cols-2 grid-cols-1 md:gap-16 sm:gap-14 gap-10'>
@@ -60,11 +60,11 @@ const ProductDetails = () => {
 
         <div>
           <h2 className='md:text-xl sm:text-lg text-base border-b-2 w-fit '>
-            <Link to={'/product/3'}>Category name</Link>
+            <Link to={'/product/3'}>{productDetails?.data?.category_id?.name}</Link>
           </h2>
 
           <h1 className='md:text-3xl sm:text-2xl text-xl font-bold md:mt-5 sm:mt-4 mt-3'>
-            The product name is here
+            {productDetails?.data?.product_name}
           </h1>
 
           <div className='flex items-center gap-5 md:mt-2 mt-1'>
@@ -77,10 +77,10 @@ const ProductDetails = () => {
 
           <div className='flex gap-4 mt-2'>
             <h2 className='md:text-xl sm:text-lg text-base font-semibold font-sans text-red-500'>
-              50.56$
+              {productDetails?.data?.actual_price - productDetails?.data?.discount}$
             </h2>
             <h2 className='md:text-xl sm:text-lg text-base font-semibold font-sans line-through'>
-              50.00$
+              {productDetails?.data?.actual_price}$
             </h2>
           </div>
 
@@ -159,25 +159,7 @@ const ProductDetails = () => {
             <p className='md:text-lg text-base font-semibold'>Description</p>
 
             <p className='md:text-sm text-xs font-medium md:leading-relaxed leading-relaxed mt-3'>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem
-              natus modi nihil culpa, voluptas facilis voluptates! Aperiam alias
-              harum ullam eaque, delectus eveniet, porro eius assumenda dolorem
-              cupiditate rerum! Quis veritatis vero fugit iure nihil provident
-              recusandae soluta, vel nesciunt! Iusto, omnis quia eius velit,
-              officiis deleniti magni, laboriosam ipsa similique dolorum
-              quaerat? Iste velit illo placeat, a tempore praesentium odit
-              excepturi laboriosam fugiat rem, ipsam doloremque debitis nulla
-              quaerat deserunt illum alias consequuntur fuga beatae? Earum
-              blanditiis recusandae porro, modi excepturi quas iure, suscipit
-              cumque libero possimus commodi labore qui soluta nobis maiores
-              exercitationem ab consectetur facilis! Repellat assumenda omnis
-              ipsam error culpa, nesciunt recusandae aspernatur exercitationem
-              harum quis doloribus deleniti ut quasi perspiciatis qui magni
-              nulla dolorem? Qui cupiditate illo id cum blanditiis soluta odit
-              facere pariatur provident. Necessitatibus at eligendi adipisci
-              doloremque ipsum ipsa repudiandae accusamus facilis ullam quis a
-              quisquam ea blanditiis nulla dolores animi similique, commodi
-              corrupti ipsam, sunt delectus voluptas vitae.
+              {productDetails?.data?.description}
             </p>
           </div>
         </div>
@@ -190,12 +172,12 @@ const ProductDetails = () => {
 
         <SCarousel className='w-full md:mt-7 mt-5'>
           <CarouselContent className=''>
-            {Array.from({ length: 5 }).map((_, index) => (
+            {products?.data?.map((product: Product) => (
               <CarouselItem
-                key={index}
+                key={product?._id}
                 className='sm:basis-1/2 md:basis-1/3 lg:basis-1/4'
               >
-                <ProductCard />
+                <ProductCard product={product} />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -215,8 +197,6 @@ const ProductDetails = () => {
           <Review key={item} />
         ))}
       </div>
-
-      <CartDrawer />
     </MyContainer>
   );
 };

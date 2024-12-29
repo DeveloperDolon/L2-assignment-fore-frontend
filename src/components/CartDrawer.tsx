@@ -23,7 +23,7 @@ const CartDrawer = () => {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button variant='outline'>Open Drawer</Button>
+        <Button variant='outline'>Cart</Button>
       </DrawerTrigger>
       <DrawerContent className='bg-white'>
         <div className='mx-auto w-full max-w-sm'>
