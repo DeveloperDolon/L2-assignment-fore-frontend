@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import authApi from './api/auth.api';
 import baseApi from './api/baseApi';
 import {persistStore, persistReducer} from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; 
+import storage from 'redux-persist/lib/storage';
 import cartReducer from './slices/cart';
 
 const persistConfig = {
