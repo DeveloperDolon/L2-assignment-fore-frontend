@@ -1,5 +1,5 @@
 import RatingStar from '@/components/RatingStar';
-import { BiDislike, BiLike, BiSolidDislike, BiSolidLike } from 'react-icons/bi';
+import { BiDislike, BiLike } from 'react-icons/bi';
 
 const Review = () => {
   return (

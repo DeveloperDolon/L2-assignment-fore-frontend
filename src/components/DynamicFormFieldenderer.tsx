@@ -13,11 +13,13 @@ import { Textarea } from './ui/textarea';
 import { ZodType, ZodTypeDef } from 'zod';
 import { FocusEventHandler } from 'react';
 
+export type TanStackFormType<TFormData> = ReactFormExtendedApi<
+unknown,
+Validator<unknown, ZodType<TFormData, ZodTypeDef, unknown>>
+>
+
 type DynamicFormFieldendererProps<TFormData> = {
-  form: ReactFormExtendedApi<
-    unknown,
-    Validator<unknown, ZodType<TFormData, ZodTypeDef, unknown>>
-  >;
+  form: TanStackFormType<TFormData>;
   fieldProps: DynamicFormField;
 };
 
@@ -84,7 +86,9 @@ const DynamicFormFieldenderer = <TFormData,>({
           name={fieldProps?.name}
           children={(field: {
             name: string;
-            state: { meta: { errors: any[] } };
+            state: { meta: { errors: unknown[], isTouched?: boolean } };
+            handleBlur: () => void;
+            handleChange: (value: string) => void;
           }) => (
             <div>
               <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
@@ -137,8 +141,10 @@ const DynamicFormFieldenderer = <TFormData,>({
         <form.Field
           name={fieldProps?.name}
           children={(field: {
+            handleBlur: ((open: boolean) => void) | undefined;
+            handleChange(e: string): void;
             name: string;
-            state: { meta: { errors: any[] } };
+            state: { meta: { errors: unknown[], isTouched: boolean } };
           }) => (
             <div>
               <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
@@ -194,7 +200,7 @@ const DynamicFormFieldenderer = <TFormData,>({
             name: string;
             handleBlur: FocusEventHandler<HTMLTextAreaElement> | undefined;
             handleChange: (arg0: string) => void;
-            state: { meta: { errors: any[] } };
+            state: { meta: { errors: unknown[], isTouched?: boolean } };
           }) => (
             <div>
               <label className='inline-block mb-2 md:text-sm text-xs font-semibold '>
