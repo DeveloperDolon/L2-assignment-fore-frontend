@@ -8,4 +8,4 @@ const brandApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCategoryListQuery } = brandApi;
+export const { useBrandListQuery } = brandApi;

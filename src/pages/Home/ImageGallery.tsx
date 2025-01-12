@@ -30,7 +30,9 @@ const ImageGallery = () => {
       });
 
       imagesLoaded(container).on('progress', function () {
-        msnry.layout();
+        if (msnry && typeof msnry.layout === 'function') {
+          msnry.layout();
+        }
       });
     }
   }, []);

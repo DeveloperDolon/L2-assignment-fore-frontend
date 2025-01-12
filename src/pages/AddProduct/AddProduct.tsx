@@ -1,4 +1,4 @@
-import DynamicFormFieldenderer from '@/components/DynamicFormFieldenderer';
+import DynamicFormFieldenderer, { TanStackFormType } from '@/components/DynamicFormFieldenderer';
 import MyContainer from '@/components/MyContainer/MyContainer';
 import { addProductFormFields } from '@/constant/formFields';
 import { zodValidator } from '@tanstack/zod-form-adapter';
@@ -49,7 +49,8 @@ const AddProduct = () => {
         return toast({
           variant: 'destructive',
           title: 'Failied',
-          description: err?.data?.message,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          description: (err as any)?.data?.message,
           action: (
             <ToastAction altText='Goto schedule to undo'>Okey</ToastAction>
           ),
@@ -99,7 +100,7 @@ const AddProduct = () => {
         {addProductFormFields?.map((field) => (
           <DynamicFormFieldenderer
             key={field?.name}
-            form={form}
+            form={form as TanStackFormType<typeof form>}
             fieldProps={field}
           />
         ))}
